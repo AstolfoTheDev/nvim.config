@@ -597,7 +597,7 @@ require('lazy').setup({
         dependencies = {
           -- `friendly-snippets` contains a variety of premade snippets.
           --    See the README about individual language/framework/plugin snippets:
-          --    https://github.com/rafamadriz/friendly-snippets
+          --    https://github.com/r{ use_treesitter = true }afamadriz/friendly-snippets
           -- {
           --   'rafamadriz/friendly-snippets',
           --   config = function()
@@ -617,8 +617,11 @@ require('lazy').setup({
     config = function()
       -- See `:help cmp`
       local cmp = require 'cmp'
-      local luasnip = require 'luasnip'
-      luasnip.config.setup {}
+      local luasnip = require 'luasnip' --require('luasnip').config.setup { enable_autosnippets = true } --require 'luasnip'
+      luasnip.config.setup {
+        enable_autosnippets = true,
+        store_selection_keys = '<Tab>',
+      }
 
       cmp.setup {
         snippet = {
@@ -756,6 +759,7 @@ require('lazy').setup({
       auto_install = true,
       highlight = {
         enable = true,
+        disable = { 'latex' },
         -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
         --  If you are experiencing weird indenting issues, add the language to
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
@@ -796,6 +800,7 @@ require('lazy').setup({
   require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.lazygit',
   require 'kickstart.plugins.vimtex',
+  require 'kickstart.plugins.luasnip-latex-snippets',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
